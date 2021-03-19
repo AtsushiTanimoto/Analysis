@@ -15,6 +15,6 @@ tabgtigen table=mos2.lc gtiset=mos2.gti timecolumn=TIME expression="(RATE <= 1)"
 tabgtigen table=epn1.lc gtiset=epn1.gti timecolumn=TIME expression="(RATE <= 1)"
 
 #Applying Time Filters
-evselect table=mos1.fits withfilteredset=yes expression="GTI(mos1.gti,TIME) && (PATTERN <= 12) && (PI in [200:12000]) && #XMMEA_EM" filteredset=mos1.flt filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes
-evselect table=mos2.fits withfilteredset=yes expression="GTI(mos2.gti,TIME) && (PATTERN <= 12) && (PI in [200:12000]) && #XMMEA_EM" filteredset=mos2.flt filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes
-evselect table=epn1.fits withfilteredset=yes expression="GTI(epn1.gti,TIME) && (PATTERN <= 12) && (PI in [200:12000]) && #XMMEA_EP" filteredset=epn1.flt filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes
+evselect table=mos1.fits withfilteredset=yes expression="GTI(mos1.gti,TIME) && (PATTERN <= 12) && (PI in [200:12000]) && #XMMEA_EM" filteredset=mos1.ffits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes
+evselect table=mos2.fits withfilteredset=yes expression="GTI(mos2.gti,TIME) && (PATTERN <= 12) && (PI in [200:12000]) && #XMMEA_EM" filteredset=mos2.ffits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes
+evselect table=epn1.fits withfilteredset=yes expression="GTI(epn1.gti,TIME) && (PATTERN <= 12) && (PI in [200:12000]) && #XMMEA_EP" filteredset=epn1.ffits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes
