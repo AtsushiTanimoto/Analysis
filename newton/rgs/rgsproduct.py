@@ -4,7 +4,7 @@ import subprocess
 if __name__=="__main__":
     filename = input()
 
-    subprocess.run("rgsproc orders=1 spectrumbinning=lambda withmlambdacolumn=yes", shell=True)
+    subprocess.run("rgsproc orders=1 withmlambdacolumn=yes", shell=True)
     
     subprocess.run("mv *R1S*EVENLI*FIT  rgs01.fits",    shell=True)
     subprocess.run("mv *R2S*EVENLI*FIT  rgs02.fits",    shell=True)
@@ -15,7 +15,7 @@ if __name__=="__main__":
     subprocess.run("evselect  expression='(CCDNR==9)&&(REGION(rgs02src.fits:RGS2_BACKGROUND, M_LAMBDA, XDSP_CORR))' makeratecolumn=yes maketimecolumn=yes rateset=rgs02src.lc table=rgs02.fits timebinsize=100 withrateset=yes", shell=True)
     subprocess.run("tabgtigen expression='(RATE<=0.2)' gtiset=rgs01src.gti table=rgs01src.lc", shell=True)
     subprocess.run("tabgtigen expression='(RATE<=0.2)' gtiset=rgs02src.gti table=rgs02src.lc", shell=True)
-    subprocess.run("rgsproc auxgtitables=rgs01src.gti bkgcorrect=no orders=1 spectrumbinning=lambda withmlambdacolumn=yes", shell=True)
+    subprocess.run("rgsproc auxgtitables=rgs01src.gti orders=1 withmlambdacolumn=yes", shell=True)
 
     subprocess.run("mv *R1S*EVENLI*FIT  rgs01.fits",    shell=True)
     subprocess.run("mv *R2S*EVENLI*FIT  rgs02.fits",    shell=True)
