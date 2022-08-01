@@ -1,7 +1,10 @@
-import subprocess
+import heasoftpy
+import os
 
 
 if __name__=="__main__":
-    print("Please enter obsid.")
-    obsid = input()
-    subprocess.run("nupipeline indir=../../{0:s} outdir=. saamode=optimized steminputs=nu{0:s} tentacle=yes".format(obsid), shell=True)
+    nupipeline  = heasoftpy.HSPTask("nupipeline")
+    obsid       = os.listdir("../../")[0]
+    indir       = "../../{0:s}".format(obsid)
+    steminputs  = "nu{0:s}".format(obsid)
+    nupipeline(indir=indir, steminputs=steminputs, outdir=".", saamode="optimized", tentacle="yes", noprompt=True, verbose=True)
