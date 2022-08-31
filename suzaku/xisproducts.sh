@@ -13,7 +13,7 @@ xselect<<EOF
 xsel
 no
 read event
-./
+.
 ${xis}.txt
 filter region ${reg}.reg
 extract spec
@@ -23,12 +23,6 @@ exit
 no
 EOF
 done
-done
-
-
-for xis in xis0 xis1 xis2 xis3
-do
-xisrmfgen phafile=${xis}src.pha outfile=${xis}src.rmf
 done
 
 
