@@ -4,7 +4,7 @@ xselect<<EOF
 xsel
 no
 read event
-./
+.
 xis.txt
 extract image
 saoimage
