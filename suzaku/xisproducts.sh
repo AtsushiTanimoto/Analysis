@@ -7,7 +7,7 @@ ls *xi3*cl* > xis3.txt
 
 for xis in xis0 xis1 xis2 xis3
 do
-for reg in bkg src
+for reg in back sour
 do
 xselect<<EOF
 xsel
