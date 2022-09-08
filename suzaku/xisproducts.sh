@@ -7,7 +7,23 @@ ls *xi3*cl* > xis3.txt
 
 for xis in xis0 xis1 xis2 xis3
 do
-for reg in back sour
+xselect<<EOF
+xsel
+no
+read event
+.
+${xis}.txt
+filter region back.reg
+extract spec
+save spec ${xis}back.pha
+no
+exit
+no
+EOF
+done
+
+
+for xis in xis0 xis1 xis2 xis3
 do
 xselect<<EOF
 xsel
@@ -15,14 +31,13 @@ no
 read event
 .
 ${xis}.txt
-filter region ${reg}.reg
+filter region sour.reg
 extract spec
-save spec ${xis}${reg}.pha
+save spec ${xis}src.pha
 no
 exit
 no
 EOF
-done
 done
 
 
