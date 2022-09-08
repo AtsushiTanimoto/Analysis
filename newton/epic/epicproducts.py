@@ -2,13 +2,13 @@ import subprocess
 
 
 if __name__=="__main__":
-    with open("bkg.reg", mode="r") as fin:
+    with open("back.reg", mode="r") as fin:
         for data in fin.readlines():
             if data[:6]=="circle":
                 backx = data[ 7:16]
                 backy = data[17:26]
     
-    with open("src.reg", mode="r") as fin:
+    with open("sour.reg", mode="r") as fin:
         for data in fin.readlines():
             if data[:6]=="circle":
                 sourx = data[ 7:16]
