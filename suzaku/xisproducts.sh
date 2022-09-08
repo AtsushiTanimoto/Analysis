@@ -15,7 +15,7 @@ read event
 ${xis}.txt
 filter region back.reg
 extract spec
-save spec ${xis}back.pha
+save spec ${xis}bkg.pha
 no
 exit
 no
