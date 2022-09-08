@@ -7,6 +7,6 @@ read event
 .
 xis.txt
 extract image
-saoimage
+save image xis0src.img
 EOF
 rm xis.txt
