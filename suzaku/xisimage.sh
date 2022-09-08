@@ -7,6 +7,6 @@ read event
 .
 xis.txt
 extract image
-save image xis0src.img
+save image xis0src.fits
 EOF
 rm xis.txt
