@@ -1,3 +1,4 @@
+import re
 import subprocess
 
 
@@ -5,14 +6,14 @@ if __name__=="__main__":
     with open("back.reg", mode="r") as fin:
         for data in fin.readlines():
             if data[:6]=="circle":
-                backx = data[ 7:16]
-                backy = data[17:26]
+                backx = re.findall("\d+(?:\.\d+)?", data)[0]
+                backy = re.findall("\d+(?:\.\d+)?", data)[1]
     
     with open("sour.reg", mode="r") as fin:
         for data in fin.readlines():
             if data[:6]=="circle":
-                sourx = data[ 7:16]
-                soury = data[17:26]
+                sourx = re.findall("\d+(?:\.\d+)?", data)[0]
+                soury = re.findall("\d+(?:\.\d+)?", data)[1]
 
     #Evselect
     subprocess.run("evselect table=mos01.ffits energycolumn=PI withfilteredset=yes filteredset=mos01bkg.fits keepfilteroutput=yes filtertype=expression expression='((X,Y) in CIRCLE({0:s},{1:s},600))'                                     withspectrumset=yes spectrumset=mos01src.pha spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=11999".format(backx,backy), shell=True)
