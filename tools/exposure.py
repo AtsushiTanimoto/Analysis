@@ -11,6 +11,10 @@ if __name__=="__main__":
         with astropy.io.fits.open("epnsrc.pha") as fin:
             print("Exposure of Newton/EPN   = {0:02d} ksec".format(round(fin[1].header["EXPOSURE"]/1000)))
 
+    if os.path.exists("xrtsrc.pha"):
+        with astropy.io.fits.open("xrtsrc.pha") as fin:
+            print("Exposure of Swift/XRT    = {0:02d} ksec".format(round(fin[1].header["EXPOSURE"]/1000)))            
+
     if os.path.exists("xibsrc.pha"):
         with astropy.io.fits.open("xibsrc.pha") as fin:
             print("Exposure of Suzaku/XIS1  = {0:02d} ksec".format(round(fin[1].header["EXPOSURE"]/1000)))            
