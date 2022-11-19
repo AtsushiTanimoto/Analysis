@@ -19,33 +19,33 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
     xspec.Xset.xsect        = "vern"
 
     if satelite=="Chandra":
-        xspec.AllData("1:1 acsgrp.pha")
-        xspec.AllData("2:2 fpmgrp.pha")
-        xspec.AllData("3:3 batgrp.pha")
+        xspec.AllData       ("1:1 acsgrp.pha")
+        xspec.AllData       ("2:2 fpmgrp.pha")
+        xspec.AllData       ("3:3 batgrp.pha")
         xspec.AllData.ignore("1:**-1.00   8.0-**")
         xspec.AllData.ignore("2:**-8.00  25.0-**")
         xspec.AllData.ignore("3:        100.0-**")
     elif satelite=="Newton":
-        xspec.AllData("1:1 mosgrp.pha")
-        xspec.AllData("2:2 epngrp.pha")
-        xspec.AllData("3:3 fpmgrp.pha")
-        xspec.AllData("4:4 batgrp.pha")
+        xspec.AllData       ("1:1 mosgrp.pha")
+        xspec.AllData       ("2:2 epngrp.pha")
+        xspec.AllData       ("3:3 fpmgrp.pha")
+        xspec.AllData       ("4:4 batgrp.pha")
         xspec.AllData.ignore("1:**-0.50   8.0-**")
         xspec.AllData.ignore("2:**-0.50  10.0-**")
         xspec.AllData.ignore("3:**-8.00  60.0-**")
         xspec.AllData.ignore("4:        100.0-**")
     elif satelite=="Swift":
-        xspec.AllData("1:1 xrtgrp.pha")
-        xspec.AllData("2:2 fpmgrp.pha")
-        xspec.AllData("3:3 batgrp.pha")
+        xspec.AllData       ("1:1 xrtgrp.pha")
+        xspec.AllData       ("2:2 fpmgrp.pha")
+        xspec.AllData       ("3:3 batgrp.pha")
         xspec.AllData.ignore("1:**-1.00   6.0-**")
         xspec.AllData.ignore("2:**-4.00  30.0-**")
         xspec.AllData.ignore("3:        100.0-**")
     elif satelite=="Suzaku":
-        xspec.AllData("1:1 xibgrp.pha")
-        xspec.AllData("2:2 xifgrp.pha")
-        xspec.AllData("3:3 fpmgrp.pha")
-        xspec.AllData("4:4 batgrp.pha")
+        xspec.AllData       ("1:1 xibgrp.pha")
+        xspec.AllData       ("2:2 xifgrp.pha")
+        xspec.AllData       ("3:3 fpmgrp.pha")
+        xspec.AllData       ("4:4 batgrp.pha")
         xspec.AllData.ignore("1:**-0.50   8.0-**")
         xspec.AllData.ignore("2:**-0.50  10.0-**")
         xspec.AllData.ignore("3:**-8.00  60.0-**")
@@ -250,51 +250,93 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
     xspec.AllModels(1)(16).values   = xspec.AllChains.best()[4]
     xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
     xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
-    xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[7]
     
     xspec.Fit.error("03 07 10 11 16 17 18")
     xspec.Plot     ("eeufspec")
     xspec.Xset.save("0001.xcm")
 
-    energy0101  = xspec.Plot.x(1)
-    energy0102  = xspec.Plot.xErr(1)
-    energy0201  = xspec.Plot.x(2)
-    energy0202  = xspec.Plot.xErr(2)
-    energy0301  = xspec.Plot.x(3)
-    energy0302  = xspec.Plot.xErr(3)
-    counts0101  = xspec.Plot.y(1)
-    counts0102  = xspec.Plot.yErr(1)
-    counts0201  = xspec.Plot.y(2)
-    counts0202  = xspec.Plot.yErr(2)
-    counts0301  = xspec.Plot.y(3)
-    counts0302  = xspec.Plot.yErr(3)
-    models0101  = xspec.Plot.model(1)
-    models0201  = xspec.Plot.model(2)
-    models0301  = xspec.Plot.model(3)
-    
-    fig = matplotlib.pyplot.figure  (dpi=200, figsize=(16,9))
-    fig.subplots_adjust             (left=0.125, bottom=0.125, right=0.95, top=0.95)
-    matplotlib.pyplot.axis          ([1.00e+00, 1.00e+02, 1.00e-08, 1.00e+00])
-    matplotlib.pyplot.errorbar      (x=energy0101, xerr=energy0102, y=counts0101, yerr=counts0102, elinewidth=2, color="tomato",     label="Chandra/ACIS", linewidth=0, marker="o", markersize=4)
-    matplotlib.pyplot.errorbar      (x=energy0201, xerr=energy0202, y=counts0201, yerr=counts0202, elinewidth=2, color="dodgerblue", label="NuSTAR/FPM",   linewidth=0, marker="o", markersize=4)
-    matplotlib.pyplot.errorbar      (x=energy0301, xerr=energy0302, y=counts0301, yerr=counts0302, elinewidth=2, color="darkviolet", label="Swift/BAT",    linewidth=0, marker="o", markersize=4)
-    matplotlib.pyplot.plot          (energy0101, models0101, color="tomato",     linewidth=2, markersize=0)
-    matplotlib.pyplot.plot          (energy0201, models0201, color="dodgerblue", linewidth=2, markersize=0)
-    matplotlib.pyplot.plot          (energy0301, models0301, color="darkviolet", linewidth=2, markersize=0)
-    matplotlib.pyplot.legend        (loc="upper right")
-    matplotlib.pyplot.xlabel        ("Energy (keV)")
-    matplotlib.pyplot.xscale        ("log")
-    matplotlib.pyplot.xticks        (numpy.logspace(0.00, 2.00, 11))
-    matplotlib.pyplot.ylabel        ("Count ($\mathrm{s}^{-1} \ \mathrm{keV}^{-1} \ \mathrm{cm}^{-2}$)")
-    matplotlib.pyplot.yscale        ("log")
-    matplotlib.pyplot.savefig       ("0001.pdf")
-    matplotlib.pyplot.close         ()
 
-
-if __name__=="__main__":
+def PlotSpectrum(satelite):
     seaborn.set        ()
     seaborn.set_context("poster")
 
+    if satelite=="Chandra":
+        seaborn.set_palette("hls", 3)
+        energy0101  = xspec.Plot.x(1)
+        energy0102  = xspec.Plot.xErr(1)
+        energy0201  = xspec.Plot.x(2)
+        energy0202  = xspec.Plot.xErr(2)
+        energy0301  = xspec.Plot.x(3)
+        energy0302  = xspec.Plot.xErr(3)
+        counts0101  = xspec.Plot.y(1)
+        counts0102  = xspec.Plot.yErr(1)
+        counts0201  = xspec.Plot.y(2)
+        counts0202  = xspec.Plot.yErr(2)
+        counts0301  = xspec.Plot.y(3)
+        counts0302  = xspec.Plot.yErr(3)
+        models0101  = xspec.Plot.model(1)
+        models0201  = xspec.Plot.model(2)
+        models0301  = xspec.Plot.model(3)
+        fig         = matplotlib.pyplot.figure(dpi=200, figsize=(16,9))
+        fig.subplots_adjust         (left=0.125, bottom=0.125, right=0.95, top=0.95)
+        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-08, 1.00e+00])
+        matplotlib.pyplot.errorbar  (x=energy0101, xerr=energy0102, y=counts0101, yerr=counts0102, elinewidth=2, label="Chandra/ACIS", linewidth=0, marker="o", markersize=4)
+        matplotlib.pyplot.errorbar  (x=energy0201, xerr=energy0202, y=counts0201, yerr=counts0202, elinewidth=2, label="NuSTAR/FPM",   linewidth=0, marker="o", markersize=4)
+        matplotlib.pyplot.errorbar  (x=energy0301, xerr=energy0302, y=counts0301, yerr=counts0302, elinewidth=2, label="Swift/BAT",    linewidth=0, marker="o", markersize=4)
+        matplotlib.pyplot.plot      (energy0101, models0101, linewidth=2, markersize=0)
+        matplotlib.pyplot.plot      (energy0201, models0201, linewidth=2, markersize=0)
+        matplotlib.pyplot.plot      (energy0301, models0301, linewidth=2, markersize=0)
+        matplotlib.pyplot.legend    (loc="upper right")
+        matplotlib.pyplot.xlabel    ("Energy (keV)")
+        matplotlib.pyplot.xscale    ("log")
+        matplotlib.pyplot.xticks    (numpy.logspace(0.00, 2.00, 11))
+        matplotlib.pyplot.ylabel    ("Count ($\mathrm{s}^{-1} \ \mathrm{keV}^{-1} \ \mathrm{cm}^{-2}$)")
+        matplotlib.pyplot.yscale    ("log")
+        matplotlib.pyplot.savefig   ("0001.pdf")
+        matplotlib.pyplot.close     ()
+    elif satelite=="Newton":
+        energy0101  = xspec.Plot.x(1)
+        energy0102  = xspec.Plot.xErr(1)
+        energy0201  = xspec.Plot.x(2)
+        energy0202  = xspec.Plot.xErr(2)
+        energy0301  = xspec.Plot.x(3)
+        energy0302  = xspec.Plot.xErr(3)
+        energy0401  = xspec.Plot.x(4)
+        energy0402  = xspec.Plot.xErr(4)
+        counts0101  = xspec.Plot.y(1)
+        counts0102  = xspec.Plot.yErr(1)
+        counts0201  = xspec.Plot.y(2)
+        counts0202  = xspec.Plot.yErr(2)
+        counts0301  = xspec.Plot.y(3)
+        counts0302  = xspec.Plot.yErr(3)
+        counts0401  = xspec.Plot.y(4)
+        counts0402  = xspec.Plot.yErr(4)
+        models0101  = xspec.Plot.model(1)
+        models0201  = xspec.Plot.model(2)
+        models0301  = xspec.Plot.model(3)
+        models0401  = xspec.Plot.model(4)
+        fig         = matplotlib.pyplot.figure(dpi=200, figsize=(16,9))
+        fig.subplots_adjust         (left=0.125, bottom=0.125, right=0.95, top=0.95)
+        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-08, 1.00e+00])
+        matplotlib.pyplot.errorbar  (x=energy0101, xerr=energy0102, y=counts0101, yerr=counts0102, elinewidth=2, color="tomato",     label="Newton/MOS", linewidth=0, marker="o", markersize=4)
+        matplotlib.pyplot.errorbar  (x=energy0201, xerr=energy0202, y=counts0201, yerr=counts0202, elinewidth=2, color="darkorange", label="Newton/PN",  linewidth=0, marker="o", markersize=4)
+        matplotlib.pyplot.errorbar  (x=energy0301, xerr=energy0302, y=counts0301, yerr=counts0302, elinewidth=2, color="dodgerblue", label="NuSTAR/FPM", linewidth=0, marker="o", markersize=4)
+        matplotlib.pyplot.errorbar  (x=energy0401, xerr=energy0402, y=counts0401, yerr=counts0402, elinewidth=2, color="darkpurple", label="Swift/BAT",  linewidth=0, marker="o", markersize=4)
+        matplotlib.pyplot.plot      (energy0101, models0101,                                                     color="tomato",     linewidth=2, markersize=0)
+        matplotlib.pyplot.plot      (energy0201, models0201,                                                     color="dodgerblue", linewidth=2, markersize=0)
+        matplotlib.pyplot.plot      (energy0301, models0301,                                                     color="darkviolet", linewidth=2, markersize=0)
+        matplotlib.pyplot.legend    (loc="upper right")
+        matplotlib.pyplot.xlabel    ("Energy (keV)")
+        matplotlib.pyplot.xscale    ("log")
+        matplotlib.pyplot.xticks    (numpy.logspace(0.00, 2.00, 11))
+        matplotlib.pyplot.ylabel    ("Count ($\mathrm{s}^{-1} \ \mathrm{keV}^{-1} \ \mathrm{cm}^{-2}$)")
+        matplotlib.pyplot.yscale    ("log")
+        matplotlib.pyplot.savefig   ("0001.pdf")
+        matplotlib.pyplot.close     ()
+
+
+
+if __name__=="__main__":
     columns         = [0.03310, 0.46400, 0.05720, 0.02470, 0.03200, 0.02000, 0.02110, 0.01720, 0.06140, 0.02850, 0.02160, 0.26600, 0.02240, 0.05230, 0.09670, 0.05540, 0.00831, 0.00859, 0.10300, 0.12600,
                        0.01170, 0.17100, 0.00979, 0.03370, 0.08470, 0.23100, 0.03340, 0.03820, 0.06930, 0.15800]
     objects         = ["2MASX J00091156--0036551", "2MASX J00253292+6821442", "Mrk 0348", "2MASX J01073963-1139117", "Mrk 0975", "NGC 0454E", "IC 1657", "NGC 0612", "NGC 0678", "MCG --01--05--047", "NGC 0788", "\\lbrack HB89 \\rbrack \ 0212+735", "IC 1816" , "2MASX J02420381+0510061", "FGC 0351", "NGC 1142" , "PKS 0326--288", "SARS 059.33488-30.34397", "3C 105"  , "2MASX J04234080+0408017"]
@@ -309,7 +351,9 @@ if __name__=="__main__":
     simultaneous    = False
     gaussian        = False
     apec            = False
+    
     SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec)
+    PlotSpectrum(satelite)
 
     import astropy.io.fits
 
