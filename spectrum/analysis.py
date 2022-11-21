@@ -29,7 +29,7 @@ def PlotSpectrum(satelite):
         models0301  = xspec.Plot.model(3)
         fig         = matplotlib.pyplot.figure(dpi=200, figsize=(16,9))
         fig.subplots_adjust         (left=0.125, bottom=0.125, right=0.95, top=0.95)
-        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-08, 1.00e+00])
+        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-06, 1.00e+02])
         matplotlib.pyplot.errorbar  (x=energy0101, xerr=energy0102, y=counts0101, yerr=counts0102, elinewidth=2, label="Chandra/ACIS", linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0201, xerr=energy0202, y=counts0201, yerr=counts0202, elinewidth=2, label="NuSTAR/FPM",   linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0301, xerr=energy0302, y=counts0301, yerr=counts0302, elinewidth=2, label="Swift/BAT",    linewidth=0, marker="o", markersize=4)
@@ -68,7 +68,7 @@ def PlotSpectrum(satelite):
         models0401  = xspec.Plot.model(4)
         fig         = matplotlib.pyplot.figure(dpi=200, figsize=(16,9))
         fig.subplots_adjust         (left=0.125, bottom=0.125, right=0.95, top=0.95)
-        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-08, 1.00e+00])
+        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-06, 1.00e+02])
         matplotlib.pyplot.errorbar  (x=energy0101, xerr=energy0102, y=counts0101, yerr=counts0102, elinewidth=2, label="Newton/MOS", linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0201, xerr=energy0202, y=counts0201, yerr=counts0202, elinewidth=2, label="Newton/PN",  linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0301, xerr=energy0302, y=counts0301, yerr=counts0302, elinewidth=2, label="NuSTAR/FPM", linewidth=0, marker="o", markersize=4)
@@ -104,7 +104,7 @@ def PlotSpectrum(satelite):
         models0301  = xspec.Plot.model(3)
         fig         = matplotlib.pyplot.figure(dpi=200, figsize=(16,9))
         fig.subplots_adjust         (left=0.125, bottom=0.125, right=0.95, top=0.95)
-        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-08, 1.00e+00])
+        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-06, 1.00e+02])
         matplotlib.pyplot.errorbar  (x=energy0101, xerr=energy0102, y=counts0101, yerr=counts0102, elinewidth=2, label="Swift/XRT",  linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0201, xerr=energy0202, y=counts0201, yerr=counts0202, elinewidth=2, label="NuSTAR/FPM", linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0301, xerr=energy0302, y=counts0301, yerr=counts0302, elinewidth=2, label="Swift/BAT",  linewidth=0, marker="o", markersize=4)
@@ -143,7 +143,7 @@ def PlotSpectrum(satelite):
         models0401  = xspec.Plot.model(4)
         fig         = matplotlib.pyplot.figure(dpi=200, figsize=(16,9))
         fig.subplots_adjust         (left=0.125, bottom=0.125, right=0.95, top=0.95)
-        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-08, 1.00e+00])
+        matplotlib.pyplot.axis      ([1.00e+00, 1.00e+02, 1.00e-06, 1.00e+02])
         matplotlib.pyplot.errorbar  (x=energy0101, xerr=energy0102, y=counts0101, yerr=counts0102, elinewidth=2, label="Suzaku/BIXIS", linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0201, xerr=energy0202, y=counts0201, yerr=counts0202, elinewidth=2, label="Suzaku/FIXIS", linewidth=0, marker="o", markersize=4)
         matplotlib.pyplot.errorbar  (x=energy0301, xerr=energy0302, y=counts0301, yerr=counts0302, elinewidth=2, label="NuSTAR/FPM",   linewidth=0, marker="o", markersize=4)
@@ -360,7 +360,7 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec, l
     xspec.Fit.steppar("17 10 90 80")
     xspec.AllChains.defBurn         = 0
     xspec.AllChains.defLength       = length
-    xspec.AllChains.defWalkers      = 2
+    xspec.AllChains.defWalkers      = 10
     chain                           = xspec.Chain("0001.fits")
     chain.run()
 
