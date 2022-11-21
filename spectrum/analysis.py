@@ -162,7 +162,7 @@ def PlotSpectrum(satelite):
         matplotlib.pyplot.close     ()
 
 
-def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
+def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec, length):
     subprocess.run("rm 0001.fits", shell=True)
     subprocess.run("rm 0001.xcm" , shell=True)
 
@@ -358,8 +358,8 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
 
     xspec.Fit.perform()
     xspec.Fit.steppar("17 10 90 80")
-    xspec.AllChains.defBurn         = 5000
-    xspec.AllChains.defLength       = 50000
+    xspec.AllChains.defBurn         = 0
+    xspec.AllChains.defLength       = length
     xspec.AllChains.defWalkers      = 2
     chain                           = xspec.Chain("0001.fits")
     chain.run()
@@ -372,110 +372,88 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
     xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
     xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
     
-    if (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==True and apec==True:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==True and apec==False:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==False and apec==True:
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
-        xspec.Fit.error("03 07 10 11 16 17 18 34 37")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==False and apec==False:
-        xspec.Fit.error("03 07 10 11 16 17 18")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==True and apec==True:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
-        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[11]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37 40")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==True and apec==False:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[9]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33 40")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==False and apec==True:
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[9]
-        xspec.Fit.error("03 07 10 11 16 17 18 34 37 40")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==False and apec==False:
-        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[7]
-        xspec.Fit.error("03 07 10 11 16 17 18 40")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==True and apec==True:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==True and apec==False:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==False and apec==True:
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
-        xspec.Fit.error("03 07 10 11 16 17 18 34 37")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==False and apec==False:
-        xspec.Fit.error("03 07 10 11 16 17 18")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==True and apec==True:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
-        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[11]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37 77")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==True and apec==False:
-        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[9]
-        xspec.Fit.error("03 07 10 11 16 17 18 30 33 77")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==False and apec==True:
-        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
-        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
-        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[9]
-        xspec.Fit.error("03 07 10 11 16 17 18 34 37 77")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
-    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==False and apec==False:
-        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[7]
-        xspec.Fit.error("03 07 10 11 16 17 18 77")
-        xspec.Plot     ("eeufspec")
-        xspec.Xset.save("0001.xcm")
+    if simultaneous==True:
+        if gaussian==True and apec==True:
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+            xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif gaussian==True and apec==False:
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.Fit.error("03 07 10 11 16 17 18 30 33")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif gaussian==False and apec==True:
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+            xspec.Fit.error("03 07 10 11 16 17 18 34 37")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        else:
+            xspec.Fit.error("03 07 10 11 16 17 18")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+    else:
+        if (satelite=="Chandra" or satelite=="Swift") and gaussian==True and apec==True:
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+            xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[11]
+            xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37 40")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif (satelite=="Chandra" or satelite=="Swift") and gaussian==True and apec==False:
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[9]
+            xspec.Fit.error("03 07 10 11 16 17 18 30 33 40")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif (satelite=="Chandra" or satelite=="Swift") and gaussian==False and apec==True:
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[9]
+            xspec.Fit.error("03 07 10 11 16 17 18 34 37 40")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif (satelite=="Chandra" or satelite=="Swift") and gaussian==False and apec==False:
+            xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[7]
+            xspec.Fit.error("03 07 10 11 16 17 18 40")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif (satelite=="Newton" or satelite=="Suzaku") and gaussian==True and apec==True:
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+            xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[11]
+            xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37 77")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif (satelite=="Newton" or satelite=="Suzaku") and gaussian==True and apec==False:
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[9]
+            xspec.Fit.error("03 07 10 11 16 17 18 30 33 77")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif (satelite=="Newton" or satelite=="Suzaku") and gaussian==False and apec==True:
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[9]
+            xspec.Fit.error("03 07 10 11 16 17 18 34 37 77")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
+        elif (satelite=="Newton" or satelite=="Suzaku") and gaussian==False and apec==False:
+            xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[7]
+            xspec.Fit.error("03 07 10 11 16 17 18 77")
+            xspec.Plot     ("eeufspec")
+            xspec.Xset.save("0001.xcm")
 
 
 def WriteTable(satelite, simultaneous, gaussian, apec):
@@ -561,10 +539,11 @@ if __name__=="__main__":
     object          = objects[index]
     redshift        = redshifts[index]
     satelite        = satelites[index]
-    simultaneous    = False
+    simultaneous    = True
     gaussian        = False
     apec            = False
+    length          = 500
     
-    SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec)
+    SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec, length)
     PlotSpectrum(satelite)
     WriteTable(satelite, simultaneous, gaussian, apec)
