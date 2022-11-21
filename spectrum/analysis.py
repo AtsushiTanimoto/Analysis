@@ -179,7 +179,7 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
         xspec.AllData       ("2:2 fpmgrp.pha")
         xspec.AllData       ("3:3 batgrp.pha")
         xspec.AllData.ignore("1:**-1.00   8.0-**")
-        xspec.AllData.ignore("2:**-8.00  25.0-**")
+        xspec.AllData.ignore("2:**-8.00  60.0-**")
         xspec.AllData.ignore("3:        100.0-**")
     elif satelite=="Newton":
         xspec.AllData       ("1:1 mosgrp.pha")
@@ -195,8 +195,8 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
         xspec.AllData       ("2:2 fpmgrp.pha")
         xspec.AllData       ("3:3 batgrp.pha")
         xspec.AllData.ignore("1:**-1.00   6.0-**")
-        xspec.AllData.ignore("2:**-4.00  30.0-**")
-        xspec.AllData.ignore("3:         30.0-**")
+        xspec.AllData.ignore("2:**-4.00  60.0-**")
+        xspec.AllData.ignore("3:        100.0-**")
     elif satelite=="Suzaku":
         xspec.AllData       ("1:1 xibgrp.pha")
         xspec.AllData       ("2:2 xifgrp.pha")
@@ -372,9 +372,110 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
     xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
     xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
     
-    xspec.Fit.error("03 07 10 11 16 17 18")
-    xspec.Plot     ("eeufspec")
-    xspec.Xset.save("0001.xcm")
+    if (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==True and apec==True:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==True and apec==False:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==False and apec==True:
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+        xspec.Fit.error("03 07 10 11 16 17 18 34 37")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==True and gaussian==False and apec==False:
+        xspec.Fit.error("03 07 10 11 16 17 18")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==True and apec==True:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[11]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37 40")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==True and apec==False:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[9]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33 40")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==False and apec==True:
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[9]
+        xspec.Fit.error("03 07 10 11 16 17 18 34 37 40")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Chandra" or satelite=="Swift") and simultaneous==False and gaussian==False and apec==False:
+        xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[7]
+        xspec.Fit.error("03 07 10 11 16 17 18 40")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==True and apec==True:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==True and apec==False:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==False and apec==True:
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+        xspec.Fit.error("03 07 10 11 16 17 18 34 37")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==True and gaussian==False and apec==False:
+        xspec.Fit.error("03 07 10 11 16 17 18")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==True and apec==True:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[11]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37 77")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==True and apec==False:
+        xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[9]
+        xspec.Fit.error("03 07 10 11 16 17 18 30 33 77")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==False and apec==True:
+        xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+        xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[9]
+        xspec.Fit.error("03 07 10 11 16 17 18 34 37 77")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
+    elif (satelite=="Newton" or satelite=="Suzaku") and simultaneous==False and gaussian==False and apec==False:
+        xspec.AllModels(3)(3) .values   = xspec.AllChains.best()[7]
+        xspec.Fit.error("03 07 10 11 16 17 18 77")
+        xspec.Plot     ("eeufspec")
+        xspec.Xset.save("0001.xcm")
 
 
 def WriteTable(satelite, simultaneous, gaussian, apec):
@@ -388,27 +489,28 @@ def WriteTable(satelite, simultaneous, gaussian, apec):
 
     with open("parameter.txt", mode="w") as fout:
         fout.write("{0:<80}".format(object)                                                                                                                                                                                                                                                                                         +"& "    )
-
+        fout.write("{0:<78}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(3) .values[0]-xspec.AllModels(1)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(3) .error[1]-xspec.AllModels(1)(3) .values[0]),2))+"}$")+"&\n"   )
+        
         if satelite=="Chandra":
             if simultaneous==True:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& "    )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& ")
             else:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .values[0]-xspec.AllModels(2)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .error[1]-xspec.AllModels(2)(3) .values[0]),2))+"}$")+"&\n"   )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .values[0]-xspec.AllModels(2)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .error[1]-xspec.AllModels(2)(3) .values[0]),2))+"}$")+"& ")
         elif satelite=="Newton":
             if simultaneous==True:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& "    )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& ")
             else:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .values[0]-xspec.AllModels(3)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .error[1]-xspec.AllModels(3)(3) .values[0]),2))+"}$")+"&\n"   )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .values[0]-xspec.AllModels(3)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .error[1]-xspec.AllModels(3)(3) .values[0]),2))+"}$")+"& ")
         elif satelite=="Swift":
             if simultaneous==True:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& "    )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& ")
             else:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .values[0]-xspec.AllModels(2)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .error[1]-xspec.AllModels(2)(3) .values[0]),2))+"}$")+"&\n"   )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(2)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .values[0]-xspec.AllModels(2)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(2)(3) .error[1]-xspec.AllModels(2)(3) .values[0]),2))+"}$")+"& ")
         elif satelite=="Suzaku":
             if simultaneous==True:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& "    )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"$ (linked)")                                                                                                                                                                                                             +"& ")
             else:
-                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .values[0]-xspec.AllModels(3)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .error[1]-xspec.AllModels(3)(3) .values[0]),2))+"}$")+"&\n"   )
+                fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(3)(3) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .values[0]-xspec.AllModels(3)(3) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(3)(3) .error[1]-xspec.AllModels(3)(3) .values[0]),2))+"}$")+"& ")
            
         fout.write("{0:<78}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(7) .values[0],2))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(7) .values[0]-xspec.AllModels(1)(7) .error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(7) .error[1]-xspec.AllModels(1)(7) .values[0]),2))+"}$")+"&\n"   )
         fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+02*xspec.AllModels(1)(10).values[0],2))+"_{-"+"{0:0<4}".format(round(1e+02*(xspec.AllModels(1)(10).values[0]-xspec.AllModels(1)(10).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+02*(xspec.AllModels(1)(10).error[1]-xspec.AllModels(1)(10).values[0]),2))+"}$")+"& "    )
@@ -420,18 +522,18 @@ def WriteTable(satelite, simultaneous, gaussian, apec):
         fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(18).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(18).values[0]-xspec.AllModels(1)(18).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(18).error[1]-xspec.AllModels(1)(18).values[0]),2))+"}$")+"& "    )
         
         if gaussian==True:
-            fout.write("{0:<78}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(30).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(30).values[0]-xspec.AllModels(1)(30).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(30).error[1]-xspec.AllModels(1)(30).values[0]),2))+"}$")+"&\n"   )
-            fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(33).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(33).values[0]-xspec.AllModels(1)(33).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(33).error[1]-xspec.AllModels(1)(33).values[0]),2))+"}$")+"& "    )
+            fout.write("{0:<78}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(30).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(30).values[0]-xspec.AllModels(1)(30).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(30).error[1]-xspec.AllModels(1)(30).values[0]),2))+"}$")+"&\n")
+            fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(33).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(33).values[0]-xspec.AllModels(1)(33).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(33).error[1]-xspec.AllModels(1)(33).values[0]),2))+"}$")+"& " )
         else:
-            fout.write("{0:<78}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"&\n"   )
-            fout.write("{0:<80}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"& "    )
+            fout.write("{0:<78}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"&\n")
+            fout.write("{0:<80}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"& " )
         
         if apec==True:
-            fout.write("{0:<78}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(34).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(34).values[0]-xspec.AllModels(1)(34).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(34).error[1]-xspec.AllModels(1)(34).values[0]),2))+"}$")+"&\n"   )
-            fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(37).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(37).values[0]-xspec.AllModels(1)(37).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(37).error[1]-xspec.AllModels(1)(37).values[0]),2))+"}$")+"& "    )
+            fout.write("{0:<78}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(34).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(34).values[0]-xspec.AllModels(1)(34).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(34).error[1]-xspec.AllModels(1)(34).values[0]),2))+"}$")+"&\n")
+            fout.write("{0:<80}".format("$"+"{0:0<4}".format(round(1e+00*xspec.AllModels(1)(37).values[0],1))+"_{-"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(37).values[0]-xspec.AllModels(1)(37).error[0]),2))+"}^{+"+"{0:0<4}".format(round(1e+00*(xspec.AllModels(1)(37).error[1]-xspec.AllModels(1)(37).values[0]),2))+"}$")+"& " )
         else:
-            fout.write("{0:<78}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"&\n"   )
-            fout.write("{0:<80}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"& "    )
+            fout.write("{0:<78}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"&\n")
+            fout.write("{0:<80}".format("\\nodata")                                                                                                                                                                                                                                                                                     +"& " )
             
         fout.write("{0:<78}".format("$"+"{0:0<4}".format(round(xspec.Fit.statistic/xspec.Fit.dof,2))                                                                                                                                                                                                                          + "$")+"\\\\\n")
 
@@ -454,12 +556,12 @@ if __name__=="__main__":
                         "Swift", "Chandra",   "Swift",  "Newton", "Chandra",  "Suzaku",  "Suzaku", "Suzaku",  "Newton",  "Suzaku",   "Swift", "Newton",   "Swift",  "Newton", "Newton", "Chandra", "Chandra", "Newton", "Newton",  "Suzaku", "Chandra",  "Swift",  "Swift",  "Swift", "Suzaku", "Suzaku",  "Newton",  "Suzaku",  "Swift",  "Swift",
                         "Swift",  "Newton", "Chandra",  "Suzaku",   "Swift",  "Newton",  "Suzaku", "Suzaku",   "Swift", "Chandra", "Chandra",  "Swift",   "Swift", "Chandra",  "Swift",  "Suzaku",  "Suzaku",  "Swift", "Suzaku", "Chandra",  "Newton", "Suzaku",  "Swift", "Suzaku", "Suzaku", "Suzaku"] 
     
-    index           = 1
+    index           = 0
     column          = columns[index]
     object          = objects[index]
     redshift        = redshifts[index]
     satelite        = satelites[index]
-    simultaneous    = True
+    simultaneous    = False
     gaussian        = False
     apec            = False
     
