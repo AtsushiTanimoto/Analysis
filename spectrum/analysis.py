@@ -196,7 +196,7 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
         xspec.AllData       ("3:3 batgrp.pha")
         xspec.AllData.ignore("1:**-1.00   6.0-**")
         xspec.AllData.ignore("2:**-4.00  30.0-**")
-        xspec.AllData.ignore("3:        100.0-**")
+        xspec.AllData.ignore("3:         30.0-**")
     elif satelite=="Suzaku":
         xspec.AllData       ("1:1 xibgrp.pha")
         xspec.AllData       ("2:2 xifgrp.pha")
@@ -216,15 +216,14 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
         xspec.AllModels(2)(1) .frozen   = True
         xspec.AllModels(3)(1) .values   = 1.00e+00
         xspec.AllModels(3)(1) .frozen   = True
-
+        xspec.AllModels(3)(3) .values   = 1.00e+00
+        xspec.AllModels(3)(3) .frozen   = True
+        
         if simultaneous==True:
-            xspec.AllModels(3)(3) .values   = 1.00e+00
-            xspec.AllModels(3)(3) .frozen   = True
+            pass
         else:
             xspec.AllModels(2)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
             xspec.AllModels(2)(3) .frozen   = False
-            xspec.AllModels(3)(3) .values   = 1.00e+00
-            xspec.AllModels(3)(3) .frozen   = True
     
     elif satelite=="Newton":
         xspec.AllModels(1)(1) .values   = 1.00e+00
@@ -235,15 +234,14 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
         xspec.AllModels(3)(1) .frozen   = True
         xspec.AllModels(4)(1) .values   = 1.00e+00
         xspec.AllModels(4)(1) .frozen   = True
+        xspec.AllModels(4)(3) .values   = 1.00e+00
+        xspec.AllModels(4)(3) .frozen   = True        
         
         if simultaneous==True:
-            xspec.AllModels(4)(3) .values   = 1.00e+00
-            xspec.AllModels(4)(3) .frozen   = True
+            pass
         else:
             xspec.AllModels(3)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
             xspec.AllModels(3)(3) .frozen   = False
-            xspec.AllModels(4)(3) .values   = 1.00e+00
-            xspec.AllModels(4)(3) .frozen   = True
 
     elif satelite=="Swift":
         xspec.AllModels(1)(1) .values   = 1.05e+00
@@ -252,15 +250,14 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
         xspec.AllModels(2)(1) .frozen   = True
         xspec.AllModels(3)(1) .values   = 1.00e+00
         xspec.AllModels(3)(1) .frozen   = True
+        xspec.AllModels(3)(3) .values   = 1.00e+00
+        xspec.AllModels(3)(3) .frozen   = True        
         
         if simultaneous==True:
-            xspec.AllModels(3)(3) .values   = 1.00e+00
-            xspec.AllModels(3)(3) .frozen   = True
+            pass
         else:
             xspec.AllModels(2)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
             xspec.AllModels(2)(3) .frozen   = False
-            xspec.AllModels(3)(3) .values   = 1.00e+00
-            xspec.AllModels(3)(3) .frozen   = True
 
     elif satelite=="Suzaku":
         xspec.AllModels(1)(1) .values   = 0.90e+00
@@ -271,15 +268,14 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
         xspec.AllModels(3)(1) .frozen   = True
         xspec.AllModels(4)(1) .values   = 1.00e+00
         xspec.AllModels(4)(1) .frozen   = True
-
+        xspec.AllModels(4)(3) .values   = 1.00e+00
+        xspec.AllModels(4)(3) .frozen   = True
+        
         if simultaneous==True:
-            xspec.AllModels(4)(3) .values   = 1.00e+00
-            xspec.AllModels(4)(3) .frozen   = True
+            pass
         else:
             xspec.AllModels(3)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
             xspec.AllModels(3)(3) .frozen   = False
-            xspec.AllModels(4)(3) .values   = 1.00e+00
-            xspec.AllModels(4)(3) .frozen   = True
     
     xspec.AllModels(1)(2) .values   = column
     xspec.AllModels(1)(2) .frozen   = True
@@ -445,17 +441,21 @@ if __name__=="__main__":
                        0.28200, 0.40700, 0.03520, 0.03860, 0.02170, 0.03760, 0.04520, 0.08100, 0.04560, 0.02980, 0.05190, 0.02340, 0.04650, 0.08160, 0.01320, 0.03030, 0.02080, 0.03940, 0.01620, 0.10800, 0.08710, 0.05400, 0.06590, 0.02840, 0.01910, 0.01790, 0.00674, 0.01420, 0.02290, 0.01220,
                        0.01140, 0.01840, 0.06590, 0.02570, 0.00850, 0.06800, 0.05340, 0.02250, 0.03090, 0.01940, 0.01710, 0.05090, 0.02040, 0.03820, 0.01200, 0.01360, 0.01900, 0.00955, 0.06320, 0.09180, 0.01880, 0.02760, 0.07610, 0.03900, 0.01890, 0.00772, 0.04150, 0.08010, 0.03200, 0.03290,
                        0.06340, 0.05180, 0.17300, 0.05820, 0.05500, 0.15900, 0.13200, 0.18700, 0.19100, 0.04770, 0.82000, 0.05830, 0.06270, 0.02520, 0.02380, 0.05770, 0.94300, 0.05730, 0.04780, 0.01290, 0.06430, 0.08710, 0.09940, 0.06280, 0.01410, 0.01390]
-    objects         = ["2MASX J00091156--0036551",  "2MASX J00253292+6821442",   "Mrk 0348", "2MASX J01073963-1139117",         "Mrk 0975",     "NGC 0454E",     "IC 1657",                 "NGC 0612",  "NGC 0678",      "MCG --01--05--047",         "NGC 0788", "\\lbrack HB89 \\rbrack \ 0212+735",  "IC 1816",  "2MASX J02420381+0510061",                "FGC 0351",      "NGC 1142", "PKS 0326--288", "SARS 059.33488-30.34397", "3C 105", "2MASX J04234080+0408017", "2MASX J04332716--5843346",     "UGC 03157", "2MASX J04500193--5512404",    "ESO 553--G043", "MCG --02--15--004",         "IRAS 05581+0006", "ESO 426--G002", "ESO 121--IG028",        "VII Zw 073", "2MASX J06411806+3249313",
-                       "2MASX J07262635--3554214", "2MASX J07394469--3143024", "UGC 03995A",                "Mrk 1210", "MCG +20--21--013", "CGCG 031--072", "Fairall 272", "2MASX J08301655--6725289", "4C +29.30", "2MASX J8434495+3549421", "MCG +11--11--032",                          "NGC 2655", "Mrk 0018", "2MASX J09034285--7414170", "2MASX J09112999+4528060", "CGCG 312--012",    "VII Zw 292",                "NGC 3081", "3C 234",           "ESO 263--G013",            "ESO 374--G044", "ESO 317--G038",                 "NGC 3281", "MCG +12--10--067",          "Mrk 0417", "2MASX J10523297+1036205", "CGCG 291--028",       "NGC 3588", "MCG --01--30--041",                 "IC 0751"]
-    redshifts       = [0.07333, 0.01165, 0.01503, 0.04746, 0.04963, 0.01213, 0.01195, 0.02977, 0.00946, 0.01669, 0.01360, 2.36700, 0.01695, 0.06120, 0.05185, 0.02885, 0.10877, 0.09727, 0.10308, 0.04610,
-                       0.10230, 0.01541, 0.03306, 0.02776, 0.02897, 0.11470, 0.02243, 0.04052, 0.04133, 0.08245]
+    objects         = ["2MASX J00091156--0036551",  "2MASX J00253292+6821442",                "Mrk 0348", "2MASX J01073963-1139117",         "Mrk 0975",               "NGC 0454E",       "IC 1657",                 "NGC 0612",                "NGC 0678",      "MCG --01--05--047",                "NGC 0788", "\\lbrack HB89 \\rbrack \ 0212+735",          "IC 1816",  "2MASX J02420381+0510061",                "FGC 0351",      "NGC 1142",            "PKS 0326--288", "SARS 059.33488-30.34397",                    "3C 105", "2MASX J04234080+0408017", "2MASX J04332716--5843346",     "UGC 03157", "2MASX J04500193--5512404",    "ESO 553--G043",        "MCG --02--15--004",         "IRAS 05581+0006",           "ESO 426--G002", "ESO 121--IG028",        "VII Zw 073", "2MASX J06411806+3249313",
+                       "2MASX J07262635--3554214", "2MASX J07394469--3143024",              "UGC 03995A",                "Mrk 1210", "MCG +20--21--013",           "CGCG 031--072",   "Fairall 272", "2MASX J08301655--6725289",               "4C +29.30", "2MASX J8434495+3549421",        "MCG +11--11--032",                          "NGC 2655",         "Mrk 0018", "2MASX J09034285--7414170", "2MASX J09112999+4528060", "CGCG 312--012",               "VII Zw 292",                "NGC 3081",                    "3C 234",           "ESO 263--G013",            "ESO 374--G044", "ESO 317--G038",                 "NGC 3281", "MCG +12--10--067",                 "Mrk 0417", "2MASX J10523297+1036205",           "CGCG 291--028",       "NGC 3588", "MCG --01--30--041",                 "IC 0751",
+                                  "CGCG 187--022",                  "Was 49b",          "ESO 505--IG030",                "NGC 4388",         "NGC 4500",                "NGC 4507", "ESO 506--G027",                 "NGC 4941",                "NGC 4939",               "NGC 4992",          "NGC 5100 NED02",                 "MCG --03--34--064",     "PKS 1329-049",            "ESO 383--G018",                "Mrk 0268",      "NGC 5283", "SDSS J135329.05+132757.2",                "Mrk 0477", "WISE J144850.99--400845.6",                "IC 4518A",                 "NGC 5899", "CGCG 319--007", "2MASX J16052330--7253565",    "CGCG 367--009",                 "Mrk 1498", "2MASX J16303265+3923031", "2MASX J16531506+2349431",       "NGC 6300",     "CGCG 300--062", "2MASX J18212680+5955209",
+                                        "IC 4709",               "VII Zw 800", "2MASX J18305065+0928414",           "ESO 103--G035",    "ESO 231--G026", "2MASX J19301380+3410495",        "3C 403",                 "Cygnus A", "2MASX J20063331+5620364",           "PKS 2014--55", "2MASX J20214907+4400399",                         "II Zw 083", "IRAS 20247--7542",            "ESO 234--G050",          "ESO 234--IG063",       "IC 5063",                "4C +50.55", "2MASX J21561518+1722525",                    "3C 445",           "ESO 533--G050",                 "NGC 7319",        "3C 452",                "UGC 12282",        "UGC 12741", "2MASX J23444387--4243124",            "PKS 2356--61"]
+    redshifts       = [0.07333, 0.01165, 0.01503, 0.04746, 0.04963, 0.01213, 0.01195, 0.02977, 0.00946, 0.01669, 0.01360, 2.36700, 0.01695, 0.06120, 0.05185, 0.02885, 0.10877, 0.09727, 0.10308, 0.04610, 0.10230, 0.01541, 0.03306, 0.02776, 0.02897, 0.11470, 0.02243, 0.04052, 0.04133, 0.08245,
+                       0.02940, 0.02569, 0.01580, 0.01350, 0.03443, 0.03305, 0.02182, 0.03476, 0.06484, 0.05397, 0.03621, 0.00467, 0.01113, 0.09102, 0.02683, 0.02563, 0.05810, 0.00798, 0.18490, 0.03354, 0.02845, 0.01515, 0.01067, 0.03358, 0.03276, 0.08787, 0.04756, 0.02685, 0.01882, 0.03150,
+                       0.02488, 0.06353, 0.03971, 0.00842, 0.01038, 0.01180, 0.02502, 0.00372, 0.01038, 0.02515, 0.03194, 0.01654, 2.15000, 0.01241, 0.04035, 0.01014, 0.06332, 0.03689, 0.12300, 0.01626, 0.00864, 0.04400, 0.05151, 0.02392, 0.05470, 0.03046, 0.10344, 0.00370, 0.04202, 0.09769,
+                       0.01690, 0.00200, 0.01947, 0.01329, 0.06254, 0.06290, 0.05900, 0.05607, 0.06495, 0.06063, 0.01700, 0.02914, 0.11430, 0.00877, 0.05375, 0.01135, 0.02000, 0.07874, 0.05588, 0.02644, 0.02251, 0.08100, 0.01699, 0.01743, 0.59732, 0.09631]
     satelites       = ["Swift", "Chandra", "Suzaku", "Chandra", "Chandra", "Chandra", "Chandra", "Suzaku", "Chandra", "Suzaku", "Suzaku", "Swift", "Chandra", "Newton", "Swift", "Suzaku", "Suzaku", "Swift", "Suzaku", "Chandra", "Swift", "Swift", "Swift", "Swift", "Swift", "Swift", "Newton", "Swift", "Newton", "Newton",]
     index           = 1
     column          = columns[index]
     object          = objects[index]
     redshift        = redshifts[index]
     satelite        = satelites[index]
-    simultaneous    = False
+    simultaneous    = True
     gaussian        = False
     apec            = False
     
