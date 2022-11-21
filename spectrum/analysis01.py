@@ -209,113 +209,82 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec):
     
     xspec.Model("constant*phabs*(constant*cabs*zphabs*zcutoffpl+constant*zcutoffpl+atable{/Users/tanimoto/analysis/model/xclumpy/xclumpy_v01_RC.fits}+atable{/Users/tanimoto/analysis/model/xclumpy/xclumpy_v01_RL.fits}+zgauss+apec)")
     
-    if satelite=="Chandra" and simultaneous==True:
+    if satelite=="Chandra":
         xspec.AllModels(1)(1) .values   = 1.10e+00
         xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
         xspec.AllModels(2)(1) .values   = 1.00e+00
         xspec.AllModels(2)(1) .frozen   = True
         xspec.AllModels(3)(1) .values   = 1.00e+00
         xspec.AllModels(3)(1) .frozen   = True
-        xspec.AllModels(3)(3) .values   = 1.00e+00
-        xspec.AllModels(3)(3) .frozen   = True
-    elif satelite=="Chandra" and simultaneous==False:
-        xspec.AllModels(1)(1) .values   = 1.10e+00
-        xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
-        xspec.AllModels(2)(1) .values   = 1.00e+00
-        xspec.AllModels(2)(1) .frozen   = True
-        xspec.AllModels(2)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(2)(3) .frozen   = False
-        xspec.AllModels(3)(1) .values   = 1.00e+00
-        xspec.AllModels(3)(1) .frozen   = True
-        xspec.AllModels(3)(3) .values   = 1.00e+00
-        xspec.AllModels(3)(3) .frozen   = True
-    elif satelite=="Newton" and simultaneous==True:
+
+        if simultaneous==True:
+            xspec.AllModels(3)(3) .values   = 1.00e+00
+            xspec.AllModels(3)(3) .frozen   = True
+        else:
+            xspec.AllModels(2)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
+            xspec.AllModels(2)(3) .frozen   = False
+            xspec.AllModels(3)(3) .values   = 1.00e+00
+            xspec.AllModels(3)(3) .frozen   = True
+    
+    elif satelite=="Newton":
         xspec.AllModels(1)(1) .values   = 1.00e+00
         xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
         xspec.AllModels(2)(1) .values   = 0.90e+00
         xspec.AllModels(2)(1) .frozen   = True
         xspec.AllModels(3)(1) .values   = 1.00e+00
         xspec.AllModels(3)(1) .frozen   = True
         xspec.AllModels(4)(1) .values   = 1.00e+00
         xspec.AllModels(4)(1) .frozen   = True
-        xspec.AllModels(4)(3) .values   = 1.00e+00
-        xspec.AllModels(4)(3) .frozen   = True
-    elif satelite=="Newton" and simultaneous==False:
-        xspec.AllModels(1)(1) .values   = 1.00e+00
-        xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
-        xspec.AllModels(2)(1) .values   = 0.90e+00
-        xspec.AllModels(2)(1) .frozen   = True
-        xspec.AllModels(3)(1) .values   = 1.00e+00
-        xspec.AllModels(3)(1) .frozen   = True
-        xspec.AllModels(3)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(3)(3) .frozen   = False
-        xspec.AllModels(4)(1) .values   = 1.00e+00
-        xspec.AllModels(4)(1) .frozen   = True
-        xspec.AllModels(4)(3) .values   = 1.00e+00
-        xspec.AllModels(4)(3) .frozen   = True
-    elif satelite=="Swift" and simultaneous==True:
+        
+        if simultaneous==True:
+            xspec.AllModels(4)(3) .values   = 1.00e+00
+            xspec.AllModels(4)(3) .frozen   = True
+        else:
+            xspec.AllModels(3)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
+            xspec.AllModels(3)(3) .frozen   = False
+            xspec.AllModels(4)(3) .values   = 1.00e+00
+            xspec.AllModels(4)(3) .frozen   = True
+
+    elif satelite=="Swift":
         xspec.AllModels(1)(1) .values   = 1.05e+00
         xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
         xspec.AllModels(2)(1) .values   = 1.00e+00
         xspec.AllModels(2)(1) .frozen   = True
         xspec.AllModels(3)(1) .values   = 1.00e+00
         xspec.AllModels(3)(1) .frozen   = True
-        xspec.AllModels(3)(3) .values   = 1.00e+00
-        xspec.AllModels(3)(3) .frozen   = True
-    elif satelite=="Swift" and simultaneous==False:
-        xspec.AllModels(1)(1) .values   = 1.05e+00
-        xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
-        xspec.AllModels(2)(1) .values   = 1.00e+00
-        xspec.AllModels(2)(1) .frozen   = True
-        xspec.AllModels(2)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(2)(3) .frozen   = False
-        xspec.AllModels(3)(1) .values   = 1.00e+00
-        xspec.AllModels(3)(1) .frozen   = True
-        xspec.AllModels(3)(3) .values   = 1.00e+00
-        xspec.AllModels(3)(3) .frozen   = True
-    elif satelite=="Suzaku" and simultaneous==True:
+        
+        if simultaneous==True:
+            xspec.AllModels(3)(3) .values   = 1.00e+00
+            xspec.AllModels(3)(3) .frozen   = True
+        else:
+            xspec.AllModels(2)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
+            xspec.AllModels(2)(3) .frozen   = False
+            xspec.AllModels(3)(3) .values   = 1.00e+00
+            xspec.AllModels(3)(3) .frozen   = True
+
+    elif satelite=="Suzaku":
         xspec.AllModels(1)(1) .values   = 0.90e+00
         xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
         xspec.AllModels(2)(1) .values   = 0.95+00
         xspec.AllModels(2)(1) .frozen   = True
         xspec.AllModels(3)(1) .values   = 1.00e+00
         xspec.AllModels(3)(1) .frozen   = True
         xspec.AllModels(4)(1) .values   = 1.00e+00
         xspec.AllModels(4)(1) .frozen   = True
-        xspec.AllModels(4)(3) .values   = 1.00e+00
-        xspec.AllModels(4)(3) .frozen   = True
-    elif satelite=="Suzaku" and simultaneous==False:
-        xspec.AllModels(1)(1) .values   = 0.90e+00
-        xspec.AllModels(1)(1) .frozen   = True
-        xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(1)(3) .frozen   = False
-        xspec.AllModels(2)(1) .values   = 0.95e+00
-        xspec.AllModels(2)(1) .frozen   = True
-        xspec.AllModels(3)(1) .values   = 1.00e+00
-        xspec.AllModels(3)(1) .frozen   = True
-        xspec.AllModels(3)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
-        xspec.AllModels(3)(3) .frozen   = False
-        xspec.AllModels(4)(1) .values   = 1.00e+00
-        xspec.AllModels(4)(1) .frozen   = True
-        xspec.AllModels(4)(3) .values   = 1.00e+00
-        xspec.AllModels(4)(3) .frozen   = True
+
+        if simultaneous==True:
+            xspec.AllModels(4)(3) .values   = 1.00e+00
+            xspec.AllModels(4)(3) .frozen   = True
+        else:
+            xspec.AllModels(3)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
+            xspec.AllModels(3)(3) .frozen   = False
+            xspec.AllModels(4)(3) .values   = 1.00e+00
+            xspec.AllModels(4)(3) .frozen   = True
     
     xspec.AllModels(1)(2) .values   = column
     xspec.AllModels(1)(2) .frozen   = True
+    xspec.AllModels(1)(3) .values   = 1.00e+00, 1.00e-02, 1.00e-01, 1.00e-01, 1.00e+01, 1.00e+01
+    xspec.AllModels(1)(3) .frozen   = False
     xspec.AllModels(1)(6) .values   = redshift
     xspec.AllModels(1)(6) .frozen   = True
     xspec.AllModels(1)(7) .values   = 2.00e+00, 1.00e-02, 1.00e+00, 1.00e+00, 3.00e+00, 3.00e+00
