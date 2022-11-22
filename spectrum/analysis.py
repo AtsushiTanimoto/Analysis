@@ -463,7 +463,7 @@ def WriteTable(satelite, simultaneous, gaussian, apec):
         hydrogen    = numpy.zeros(len(fin[1].data))
 
         for i in range(len(fin[1].data)):
-            hydrogen[i]   = fin[1].data[i][4]*numpy.exp(-(fin[1].data[i][6]-90)**2/fin[1].data[i][5]**2)
+            hydrogen[i]   = 1e+02*fin[1].data[i][4]*numpy.exp(-(fin[1].data[i][6]-90)**2/fin[1].data[i][5]**2)
 
     with open("parameter.txt", mode="w") as fout:
         fout.write("{0:<80}".format(object)                                                                                                                                                                                                                                                                                         +"& "    )
@@ -539,7 +539,7 @@ if __name__=="__main__":
     object          = objects[index]
     redshift        = redshifts[index]
     satelite        = satelites[index]
-    simultaneous    = True
+    simultaneous    = False
     gaussian        = False
     apec            = False
     length          = 50000
