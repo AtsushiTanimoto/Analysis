@@ -506,11 +506,11 @@ if __name__=="__main__":
                       "Chandra",   "Swift",  "Newton", "Chandra",  "Suzaku",  "Suzaku",  "Suzaku", "Newton",  "Suzaku",   "Swift", "Newton",   "Swift",  "Newton", "Newton", "Chandra", "Chandra", "Newton", "Newton",  "Suzaku", "Chandra",  "Swift",  "Swift",  "Swift", "Suzaku", "Suzaku",  "Newton",  "Suzaku",  "Swift",  "Swift",  "Swift",
                        "Newton", "Chandra",  "Suzaku",   "Swift",  "Newton",  "Suzaku",  "Suzaku",  "Swift", "Chandra", "Chandra",  "Swift",   "Swift", "Chandra",  "Swift",  "Suzaku",  "Suzaku",  "Swift", "Suzaku", "Chandra",  "Newton", "Suzaku",  "Swift", "Suzaku", "Suzaku", "Suzaku"] 
     
-    index           = 0
-    column          = columns[index]
-    object          = objects[index]
-    redshift        = redshifts[index]
-    satelite        = satelites[index]
+    index           = 1
+    column          = columns[index-1]
+    object          = objects[index-1]
+    redshift        = redshifts[index-1]
+    satelite        = satelites[index-1]
     simultaneous    = False
     gaussian        = False
     apec            = False
