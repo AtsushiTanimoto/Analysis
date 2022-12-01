@@ -279,66 +279,106 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec, l
     xspec.AllChains.defWalkers      = 10
     chain                           = xspec.Chain("0001.fits")
     chain.run()
-
-    xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[0]
-    xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[1]
-    xspec.AllModels(1)(10).values   = xspec.AllChains.best()[2]
-    xspec.AllModels(1)(11).values   = xspec.AllChains.best()[3]
-    xspec.AllModels(1)(16).values   = xspec.AllChains.best()[4]
-    xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
-    xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
     
     if simultaneous==True:
         if gaussian==True and apec==True:
-            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
-            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
-            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[5]
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[6]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[9]
             xspec.Fit.error("07 10 11 16 17 18 30 33 34 37")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
         elif gaussian==True and apec==False:
-            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
-            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[5]
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[6]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[7]            
             xspec.Fit.error("07 10 11 16 17 18 30 33")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
         elif gaussian==False and apec==True:
-            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
-            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[5]
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[6]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[7]
             xspec.Fit.error("07 10 11 16 17 18 34 37")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
         else:
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[5]
             xspec.Fit.error("07 10 11 16 17 18")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
     else:
         if gaussian==True and apec==True:
-            xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[7]
-            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[8]
-            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[9]
-            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[10]
-            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[11]
+            xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[9]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[10]
             xspec.Fit.error("03 07 10 11 16 17 18 30 33 34 37")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
         elif gaussian==True and apec==False:
-            xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[7]
-            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[8]
-            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[9]
+            xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
+            xspec.AllModels(1)(30).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(33).values   = xspec.AllChains.best()[8]
             xspec.Fit.error("03 07 10 11 16 17 18 30 33")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
         elif gaussian==False and apec==True:
-            xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[7]
-            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[8]
-            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[9]
-            xspec.Fit.error("03 07 10 11 16 17 18 34 37")
+            xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
+            xspec.AllModels(1)(34).values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(37).values   = xspec.AllChains.best()[8]            
+            xspec.Fit.error("03 07 10 11 16 17 18 30 33")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
         elif gaussian==False and apec==False:
-            xspec.AllModels(2)(3) .values   = xspec.AllChains.best()[7]
+            xspec.AllModels(1)(3) .values   = xspec.AllChains.best()[0]
+            xspec.AllModels(1)(7) .values   = xspec.AllChains.best()[1]
+            xspec.AllModels(1)(10).values   = xspec.AllChains.best()[2]
+            xspec.AllModels(1)(11).values   = xspec.AllChains.best()[3]
+            xspec.AllModels(1)(16).values   = xspec.AllChains.best()[4]
+            xspec.AllModels(1)(17).values   = xspec.AllChains.best()[5]
+            xspec.AllModels(1)(18).values   = xspec.AllChains.best()[6]
             xspec.Fit.error("03 07 10 11 16 17 18")
             xspec.Plot     ("eeufspec")
             xspec.Xset.save("0001.xcm")
