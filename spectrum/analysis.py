@@ -131,27 +131,27 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec, l
     if satelite=="Chandra":
         xspec.AllData       ("1:1 acsgrp.pha")
         xspec.AllData       ("2:2 fpmgrp.pha")
-        xspec.AllData.ignore("1:**-1.00   8.0-**")
-        xspec.AllData.ignore("2:**-4.00  60.0-**")
+        xspec.AllData.ignore("1:**-1.00  8.0-**")
+        xspec.AllData.ignore("2:**-4.00 60.0-**")
     elif satelite=="Newton":
         xspec.AllData       ("1:1 mosgrp.pha")
         xspec.AllData       ("2:2 epngrp.pha")
         xspec.AllData       ("3:3 fpmgrp.pha")
-        xspec.AllData.ignore("1:**-1.00   8.0-**")
-        xspec.AllData.ignore("2:**-1.00  10.0-**")
-        xspec.AllData.ignore("3:**-4.00  60.0-**")
+        xspec.AllData.ignore("1:**-1.00  8.0-**")
+        xspec.AllData.ignore("2:**-1.00 10.0-**")
+        xspec.AllData.ignore("3:**-4.00 60.0-**")
     elif satelite=="Swift":
         xspec.AllData       ("1:1 xrtgrp.pha")
         xspec.AllData       ("2:2 fpmgrp.pha")
-        xspec.AllData.ignore("1:**-1.00   6.0-**")
-        xspec.AllData.ignore("2:**-4.00  60.0-**")
+        xspec.AllData.ignore("1:**-1.00  6.0-**")
+        xspec.AllData.ignore("2:**-4.00 60.0-**")
     elif satelite=="Suzaku":
         xspec.AllData       ("1:1 xibgrp.pha")
         xspec.AllData       ("2:2 xifgrp.pha")
         xspec.AllData       ("3:3 fpmgrp.pha")
-        xspec.AllData.ignore("1:**-1.00   8.0-**")
-        xspec.AllData.ignore("2:**-1.00  10.0-**")
-        xspec.AllData.ignore("3:**-4.00  60.0-**")
+        xspec.AllData.ignore("1:**-1.00  8.0-**")
+        xspec.AllData.ignore("2:**-1.00 10.0-**")
+        xspec.AllData.ignore("3:**-4.00 60.0-**")
     
     xspec.Model("constant*phabs*(constant*cabs*zphabs*zcutoffpl+constant*zcutoffpl+atable{/Users/tanimoto/analysis/model/xclumpy/xclumpy_v01_RC.fits}+atable{/Users/tanimoto/analysis/model/xclumpy/xclumpy_v01_RL.fits}+zgauss+apec)")
     
