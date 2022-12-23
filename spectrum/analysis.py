@@ -116,7 +116,7 @@ def PlotSpectrum(object, satelite):
 
     
 
-def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec, length):
+def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, length):
     subprocess.run("rm 0001.fits", shell=True)
     subprocess.run("rm 0001.xcm" , shell=True)
 
@@ -311,7 +311,7 @@ def SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, apec, l
             xspec.Xset.save("0001.xcm")
 
 
-def WriteTable(object, satelite, simultaneous, gaussian, apec):
+def WriteTable(object, simultaneous, gaussian):
     import astropy.io.fits
 
     with astropy.io.fits.open("0001.fits") as fin:
@@ -379,4 +379,4 @@ if __name__=="__main__":
     
     SpectralAnalysis(column, redshift, satelite, simultaneous, gaussian, length)
     PlotSpectrum(object, satelite)
-    WriteTable(object, satelite, simultaneous, gaussian)
+    WriteTable(object, simultaneous, gaussian)
