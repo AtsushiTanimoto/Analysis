@@ -26,6 +26,6 @@ if __name__=="__main__":
     subprocess.run("mv *R1S*SRSPEC1001* rgs01src.pha",  shell=True)
     subprocess.run("mv *R2S*SRSPEC1001* rgs02src.pha",  shell=True)
     
-    subprocess.run("rgsrmfgen emin=0.5 emax=2.0 evlist=rgs01.fits rmfset=rgs01src.rmf rows=15000 spectrumset=rgs01src.pha srclist=rgs01src.fits", shell=True)
-    subprocess.run("rgsrmfgen emin=0.5 emax=2.0 evlist=rgs02.fits rmfset=rgs02src.rmf rows=15000 spectrumset=rgs02src.pha srclist=rgs02src.fits", shell=True)
+    subprocess.run("rgsrmfgen emin=0.4 emax=2.0 evlist=rgs01.fits rmfset=rgs01src.rmf rows=16000 spectrumset=rgs01src.pha srclist=rgs01src.fits", shell=True)
+    subprocess.run("rgsrmfgen emin=0.4 emax=2.0 evlist=rgs02.fits rmfset=rgs02src.rmf rows=16000 spectrumset=rgs02src.pha srclist=rgs02src.fits", shell=True)
     subprocess.run("rgscombine bkg='rgs01bkg.pha rgs02bkg.pha' filebkg=rgs{0:s}bkg.pha filepha=rgs{0:s}src.pha filermf=rgs{0:s}src.rmf pha='rgs01src.pha rgs02src.pha' rmf='rgs01src.rmf rgs02src.rmf' rmfgrid=15000".format(filename), shell=True)
