@@ -4,12 +4,12 @@ import subprocess
 
 
 if __name__=="__main__":
-    obsid       = os.listdir("../../")[0]
-    steminputs  = "nu{0:s}".format(obsid)
-    nuproducts  = heasoftpy.HSPTask("nuproducts")
-    nuproducts({"indir":".", "instrument":"FPMA", "steminputs":"{0:s}".format(steminputs), "outdir":".", "srcregionfile":"sour.reg", "bkgextract":"yes", "bkgregionfile":"back.reg"}, noprompt=True, verbose=True)
-    nuproducts  = heasoftpy.HSPTask("nuproducts")
-    nuproducts({"indir":".", "instrument":"FPMB", "steminputs":"{0:s}".format(steminputs), "outdir":".", "srcregionfile":"sour.reg", "bkgextract":"yes", "bkgregionfile":"back.reg"}, noprompt=True, verbose=True)
+    obsid           = os.listdir("../../")[0]
+    steminputs      = "nu{0:s}".format(obsid)
+    nuproducts01    = heasoftpy.HSPTask("nuproducts")
+    nuproducts02  = heasoftpy.HSPTask("nuproducts")
+    nuproducts01({"indir":".", "instrument":"FPMA", "steminputs":"{0:s}".format(steminputs), "outdir":".", "srcregionfile":"sour.reg", "bkgextract":"yes", "bkgregionfile":"back.reg"}, noprompt=True, verbose=True)
+    nuproducts02({"indir":".", "instrument":"FPMB", "steminputs":"{0:s}".format(steminputs), "outdir":".", "srcregionfile":"sour.reg", "bkgextract":"yes", "bkgregionfile":"back.reg"}, noprompt=True, verbose=True)
     
     subprocess.run("mv nu*A01_bk.pha fpmabkg.pha", shell=True)
     subprocess.run("mv nu*A01_sr.arf fpmasrc.arf", shell=True)
