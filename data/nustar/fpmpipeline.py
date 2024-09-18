@@ -1,9 +1,9 @@
 import heasoftpy
-import os
 
 
 if __name__=="__main__":
-    obsid       = os.listdir("../../")[0]
+    print("Please input observation id.")
+    obsid       = input()
     indir       = "../../{0:s}".format(obsid)
     steminputs  = "nu{0:s}".format(obsid)
     nupipeline  = heasoftpy.HSPTask("nupipeline")
